@@ -1,6 +1,7 @@
 image-resize-rename-forweb
 ==========================
 
+<<<<<<< HEAD
 Mass-rename and resize images for a web site.
 
 
@@ -16,3 +17,8 @@ Avaiable via:
 
 
 
+=======
+Mass-rename and resize images for a web site
+
+TEST CHANGE.
+>>>>>>> origin
