@@ -58,12 +58,27 @@ Required Options:
 
 # check to see if sane options were passed
 
+# If no options specified print usage and exit
+if ($#ARGV + 1 == 0) { print $usage; exit;}
+
+
 #  GetOptions ('length|height=f' => \$length, "head" => \$head);
 
 #GetOptions ('' ==> \$ , "" => \$
 
-# $verbose = '';        
-# $help = '';           
+GetOptions (
+            'v|verbose' => \$verbose,
+            'h|help|usage' => \$help
+           );
+
+# If help option is specified print usage and exit.
+if ($help)  { print $usage; exit;}
+
+if ($verbose) {print "Verbose mode enabled.\n";}
+
+
+### $verbose = '';        
+### $help = '';           
 # $pixel_width = 600;   
 # $index_digits = 3;    # if no args or usage or help passed, spit out...
 # ptions variables requi#if (
@@ -85,7 +100,7 @@ if ($convert !~ /Version: ImageMagick/)
 # Copyright: Copyright (C) 1999-2009 ImageMagick Studio LLC
 
    }
-else {print "Using...\n$convert\n";}
+else {    if ($verbose) {print "Using...\n$convert\n";}}
 
 
 
