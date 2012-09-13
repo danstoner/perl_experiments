@@ -8,20 +8,6 @@ use Getopt::Long;
 
 # This script will always force extension to lowercase (e.g. .JPG to .jpg).
 
-# options variables
-my $verbose = '';         # verbosity (default = false)
-my $help = '';            # help or usage (default = false)
-my $pixel_width = 600;    # width of output images (default = 600)
-my $index_digits = 3;     # the number of digits in the file index
-# options variables requiring a value
-my $in_dir = '';          # the directory containing raw input files. REQUIRED
-my $out_dir = '';         # the directory for renamed output files.   REQUIRED
-my $resized_out_dir = ''; # the directory for images resized for web. REQUIRED
-my $start_index = '';     # starting index for output files           REQUIRED
-my $out_prefix = '';      # string to prepend to output filename      REQUIRED
-my $out_suffix = '';      # string to append to output filename (before extension) REQUIRED
-
-
 my $usage =
 '
 image-resize-rename-forweb.pl   - resize and rename images to meet specified pattern and size.
@@ -56,6 +42,21 @@ Required Options:
           The suffix to append to the output filename (before the extension)
 ';
 
+
+# options variables
+my $verbose = '';         # verbosity (default = false)
+my $help = '';            # help or usage (default = false)
+my $pixel_width = 600;    # width of output images (default = 600)
+my $index_digits = 3;     # the number of digits in the file index
+# options variables requiring a value
+my $in_dir = '';          # the directory containing raw input files. REQUIRED
+my $out_dir = '';         # the directory for renamed output files.   REQUIRED
+my $resized_out_dir = ''; # the directory for images resized for web. REQUIRED
+my $start_index = '';     # starting index for output files           REQUIRED
+my $out_prefix = '';      # string to prepend to output filename      REQUIRED
+my $out_suffix = '';      # string to append to output filename (before extension) REQUIRED
+
+
 # check to see if sane options were passed
 
 # If no options specified print usage and exit
@@ -66,9 +67,12 @@ if ($#ARGV + 1 == 0) { print $usage; exit;}
 
 #GetOptions ('' ==> \$ , "" => \$
 
-GetOptions (
-            'v|verbose' => \$verbose,
-            'h|help|usage' => \$help
+GetOptions ('v|verbose' => \$verbose
+           ,'h|help|usage' => \$help
+           ,'w|width' => \$pixel_width
+           ,'x|index_digits' => \$index_digits
+           ,'i|in_dir' => \$in_dir
+           ,'o|out_dir' => \$out_dir
            );
 
 # If help option is specified print usage and exit.
