@@ -58,33 +58,38 @@ Required Options:
 
 # check to see if sane options were passed
 
+#  GetOptions ('length|height=f' => \$length, "head" => \$head);
+
+#GetOptions ('' ==> \$ , "" => \$
+
+# $verbose = '';        
+# $help = '';           
+# $pixel_width = 600;   
+# $index_digits = 3;    # if no args or usage or help passed, spit out...
+# ptions variables requi#if (
+# $in_dir = '';           print $usage;
+# $out_dir = '';        
+# $resized_out_dir = '';
+# $start_index = '';    # check to see if Image Magick convert command is installed.
+# $out_prefix = '';     # 
+# $out_suffix = '';     
 
 
-
-
-
-
-
-
-# if no args or usage or help passed, spit out...
-#if (
-  print $usage;
-
-
-# check to see if Image Magick convert command is installed.
-# 
-# convert --version
 my $convert = `convert --version`;
 if ($convert !~ /Version: ImageMagick/) 
    {  print "$convert\n";
       print "\n";
       die 'ImageMagick "convert" command does not seem to be installed.';
-# Sample valid ImageMagick convert version output...
+# Sample valid ImageMagick output from version check "convert --version"
 # Version: ImageMagick 6.5.4-7 2012-04-10 Q16 OpenMP http://www.imagemagick.org
 # Copyright: Copyright (C) 1999-2009 ImageMagick Studio LLC
 
    }
 else {print "Using...\n$convert\n";}
+
+
+
+
 # check to see if specified directories exist
 
 
