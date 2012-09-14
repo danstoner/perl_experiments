@@ -36,6 +36,8 @@ Required Options:
           The directory for renamed output files.
    -w, --resized_out_dir
           The directory for web resized output files.
+   -s, --start_index
+          The starting number for incremental file index numbers
    --prefix
           The prefix for each new filename
    --suffix
@@ -60,26 +62,35 @@ my $out_suffix = '';      # string to append to output filename (before extensio
 # check to see if sane options were passed
 
 # If no options specified print usage and exit
-if ($#ARGV + 1 == 0) { print $usage; exit;}
+if ($#ARGV + 1 == 0) { usage(); exit;}
 
 
 #  GetOptions ('length|height=f' => \$length, "head" => \$head);
 
 #GetOptions ('' ==> \$ , "" => \$
 
-GetOptions ('v|verbose' => \$verbose
-           ,'h|help|usage' => \$help
-           ,'w|width' => \$pixel_width
-           ,'x|index_digits' => \$index_digits
-           ,'i|in_dir' => \$in_dir
-           ,'o|out_dir' => \$out_dir
+GetOptions ('v|verbose'            => \$verbose
+           ,'h|help|usage'         => \$help
+           ,'w|width=i'            => \$pixel_width
+           ,'x|index_digits=i'     => \$index_digits
+           ,'i|in_dir=s'           => \$in_dir
+           ,'o|out_dir=s'          => \$out_dir
+           ,'w|resized_out_dir=s'  => \$resized_out_dir
+           ,'s|start_index=i'      => \$start_index
+           ,'prefix=s'             => \$out_prefix
+           ,'suffix=s'             => \$out_suffix
            );
 
 # If help option is specified print usage and exit.
-if ($help)  { print $usage; exit;}
+if ($help)  { usage(); exit;}
 
 if ($verbose) {print "Verbose mode enabled.\n";}
 
+
+# Make sure the required options are all present.
+
+if (!$in_dir)    {usage("** Missing option --in_dir **");   exit;}
+if (!$out_dir)   {usage("** Missing option --out_dir **");  exit;}
 
 ### $verbose = '';        
 ### $help = '';           
@@ -111,6 +122,12 @@ else {    if ($verbose) {print "Using...\n$convert\n";}}
 
 # check to see if specified directories exist
 
+
+
+sub usage {
+    print $usage;
+    print "$@_ \n";
+};
 
 
 print "The end! \n";
