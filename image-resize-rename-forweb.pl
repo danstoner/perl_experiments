@@ -17,7 +17,7 @@ image-resize-rename-forweb.pl   - resize and rename images to meet specified pat
 
 Usage:
 
-  image-resize-rename-forweb.pl [options] -i dir1 -o dir2 -w dir3 --prefix=X --suffix=XXXXX 
+  image-resize-rename-forweb.pl [options] -i dir1 -o dir2 -w dir3 -s N --prefix=X --suffix=XXXXX 
 
 Options:
 
@@ -67,7 +67,6 @@ my $out_suffix = '';      # string to append to output filename (before extensio
 # If no options specified print usage and exit
 if ($#ARGV + 1 == 0) { usage(); exit;}
 
-
 #  GetOptions ('length|height=f' => \$length, "head" => \$head);
 
 #GetOptions ('' ==> \$ , "" => \$
@@ -89,11 +88,33 @@ if ($help)  { usage(); exit;}
 
 if ($verbose) {print "Verbose mode enabled.\n";}
 
-
+# summarize all options if verbose
+if ($verbose)
+{
+    print "Options / Variables in use...           \n";
+    print "  --width = $pixel_width                 \n";
+    print "  --index_digits = $index_digits         \n";
+    print "  --in_dir = $in_dir                     \n";
+    print "  --out_dir = $out_dir                   \n";
+    print "  --resized_out_dir = $resized_out_dir   \n";
+    print "  --start_index = $start_index           \n";
+    print "  --prefix = $out_prefix                 \n";
+    print "  --suffix = $out_suffix                 \n";
+}
 # Make sure the required options are all present.
 
-if (!$in_dir)    {usage("** Missing option --in_dir **");   exit;}
-if (!$out_dir)   {usage("** Missing option --out_dir **");  exit;}
+if (!$in_dir)           {usage(); die "*** Missing option --in_dir ***          \n\n";}
+
+if (!$out_dir)          {usage(); die "*** Missing option --out_dir ***         \n\n";}
+
+if (!$resized_out_dir)  {usage(); die "*** Missing option --resized_out_dir *** \n\n";}
+
+if (!$start_index)      {usage(); die "*** Missing option --start_index ***     \n\n";}
+
+if (!$out_prefix)       {usage(); die "*** Missing option --prefix ***          \n\n";}
+
+if (!$out_suffix)       {usage(); die "*** Missing option --suffix ***          \n\n";}
+
 
 ### $verbose = '';        
 ### $help = '';           
@@ -126,6 +147,8 @@ else {    if ($verbose) {print "Using...\n$convert\n";}}
 # check to see if specified directories exist
 
 
+
+### functions ###
 
 sub usage {
     print $usage;
