@@ -61,7 +61,7 @@ my $pixel_width = 600;    # width of output images (default = 600)
 my $index_digits = 3;     # the number of digits in the file index
 # options variables requiring a value
 my $in_dir = '';          # the directory containing raw input files. REQUIRED
-my $out_dir = '';         # the directory for renamed output files.   REQUIRED
+my $out_dir = '';         # the directory for indexed output files.   REQUIRED
 my $resized_out_dir = ''; # the directory for images resized for web. REQUIRED
 my $start_index = '';     # starting index for output files           REQUIRED
 my $out_prefix = '';      # string to prepend to output filename      REQUIRED
@@ -148,6 +148,11 @@ unless (-d $in_dir) { die "*Error* Source input directory does not exist: $in_di
 
 
 # If specified Output directories do not exist, shall we create?
+
+# for file in * do 
+#     1. rename in place
+#     2. mk new output subdir "for_web"
+#     3. convert to resized output dir
 
 
 
