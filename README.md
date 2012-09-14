@@ -4,9 +4,11 @@ image-resize-rename-forweb
 Mass-rename and resize images for a web site.
 
 
-Requires:  ImageMagick (convert)
+Requires:  ImageMagick (convert),
            Perl, Getopt::Long
 
+The premise is that I already have a system of file naming and organizing in place,
+this script is to help automate the work.
 
 Usage:
 
