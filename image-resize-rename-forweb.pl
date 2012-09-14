@@ -28,7 +28,7 @@ Usage:
 Options:
 
    -h, --help, --usage
-          Display this usage help text.
+          Display this usage help text and exit.
    -v, --verbose
           Turn on verbose mode.
 
@@ -67,6 +67,9 @@ my $start_index = '';     # starting index for output files           REQUIRED
 my $out_prefix = '';      # string to prepend to output filename      REQUIRED
 my $out_suffix = '';      # string to append to output filename (before extension) REQUIRED
 
+
+# spit out a new line
+print "\n";
 
 # check to see if sane options were passed
 
@@ -107,39 +110,29 @@ if ($verbose)
     print "  --prefix = $out_prefix                 \n";
     print "  --suffix = $out_suffix                 \n";
 }
+
 # Make sure the required options are all present.
 
-if (!$in_dir)           {usage(); die "*** Missing option --in_dir ***          \n\n";}
+if (!$in_dir)           {usage(); die "*** Missing required option --in_dir ***          \n\n";}
 
-if (!$out_dir)          {usage(); die "*** Missing option --out_dir ***         \n\n";}
+if (!$out_dir)          {usage(); die "*** Missing required option --out_dir ***         \n\n";}
 
-if (!$resized_out_dir)  {usage(); die "*** Missing option --resized_out_dir *** \n\n";}
+if (!$resized_out_dir)  {usage(); die "*** Missing required option --resized_out_dir *** \n\n";}
 
-if (!$start_index)      {usage(); die "*** Missing option --start_index ***     \n\n";}
+if (!$start_index)      {usage(); die "*** Missing required option --start_index ***     \n\n";}
 
-if (!$out_prefix)       {usage(); die "*** Missing option --prefix ***          \n\n";}
+if (!$out_prefix)       {usage(); die "*** Missing required option --prefix ***          \n\n";}
 
-if (!$out_suffix)       {usage(); die "*** Missing option --suffix ***          \n\n";}
+if (!$out_suffix)       {usage(); die "*** Missing required option --suffix ***          \n\n";}
 
 
-### $verbose = '';        
-### $help = '';           
-# $pixel_width = 600;   
-# $index_digits = 3;    # if no args or usage or help passed, spit out...
-# ptions variables requi#if (
-# $in_dir = '';           print $usage;
-# $out_dir = '';        
-# $resized_out_dir = '';
-# $start_index = '';    # check to see if Image Magick convert command is installed.
-# $out_prefix = '';     # 
-# $out_suffix = '';     
-
+# Check to see if ImageMagick is installed
 
 my $convert = `convert --version`;
 if ($convert !~ /Version: ImageMagick/) 
    {  print "$convert\n";
       print "\n";
-      die 'ImageMagick "convert" command does not seem to be installed.';
+      die '*Error* ImageMagick "convert" command does not seem to be installed.';
 # Sample valid ImageMagick output from version check "convert --version"
 # Version: ImageMagick 6.5.4-7 2012-04-10 Q16 OpenMP http://www.imagemagick.org
 # Copyright: Copyright (C) 1999-2009 ImageMagick Studio LLC
@@ -147,10 +140,15 @@ if ($convert !~ /Version: ImageMagick/)
    }
 else {    if ($verbose) {print "Using...\n$convert\n";}}
 
+# check to see if specified input directory exists
+unless (-d $in_dir) { die "*Error* Source input directory does not exist: $in_dir \n"; }
+
+# other checks?
 
 
 
-# check to see if specified directories exist
+# If specified Output directories do not exist, shall we create?
+
 
 
 
