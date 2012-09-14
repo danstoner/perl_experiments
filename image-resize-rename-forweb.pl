@@ -5,6 +5,12 @@
 # A resized and renamed version of the file gets placed in a folder for later upload to the web.
 # Note: This script will likely always force extension to lowercase (e.g. .JPG to .jpg).
 #
+# Future Features:
+#  - consider using Getopt::ArgvFile to allow settings to be stored in config files.
+#  - ?
+#  - ?
+#
+
 use strict;
 use warnings;
 
