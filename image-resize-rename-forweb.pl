@@ -1,12 +1,15 @@
 #!/usr/bin/perl
-
+# image-resize-rename-forweb.pl
+# A script for doing mass-rename, resize, and filing of images.
+# A renamed version of the image gets placed in its permanent location.
+# A resized and renamed version of the file gets placed in a folder for later upload to the web.
+# Note: This script will likely always force extension to lowercase (e.g. .JPG to .jpg).
+#
 use strict;
 use warnings;
 
 use Getopt::Long;
 
-
-# This script will always force extension to lowercase (e.g. .JPG to .jpg).
 
 my $usage =
 '
